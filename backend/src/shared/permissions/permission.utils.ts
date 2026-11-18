@@ -42,7 +42,7 @@ const isGranted = (permissions: RolePermissions, key: PermissionKey) => {
 
 /**
  *   hasPermission({ permissions, required: "role.create" })
- *   hasPermission({ permissions, required: ["role.read", "doctor.read"], match: "any" })
+ *   hasPermission({ permissions, required: ["role.read", "user.read"], match: "any" })
  */
 export const hasPermission = ({
   permissions,
