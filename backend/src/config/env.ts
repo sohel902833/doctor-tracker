@@ -15,6 +15,10 @@ const envSchema = z.object({
   MONGO_URI: z.string().min(1, "MONGO_URI is required"),
   REDIS_URL: z.string().min(1, "REDIS_URL is required"),
   CORS_ORIGIN: z.string().default("http://localhost:3000"),
+  // Which proxies may set X-Forwarded-For (the Next.js frontend calls the
+  // API on behalf of browsers). Express "trust proxy" syntax; the default
+  // trusts only local/private-network proxies, so clients can't spoof it.
+  TRUST_PROXY: z.string().default("loopback, linklocal, uniquelocal"),
   JWT_ACCESS_SECRET: z
     .string()
     .min(32, "JWT_ACCESS_SECRET must be at least 32 characters"),

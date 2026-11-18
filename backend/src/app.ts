@@ -11,6 +11,10 @@ import { serviceUnavailable, success } from "./shared/utils/response";
 
 const app = express();
 
+// req.ip = the real client IP when the request came through a trusted
+// proxy (the Next.js frontend), so rate limits count per user, not per proxy.
+app.set("trust proxy", env.TRUST_PROXY);
+
 app.use(helmet());
 app.use(cors({ origin: env.CORS_ORIGINS, credentials: true }));
 app.use(express.json({ limit: "1mb" }));
