@@ -35,7 +35,7 @@ export function PatientHistorySheet({
 
   return (
     <Sheet open={Boolean(patientId)} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full overflow-y-auto sm:max-w-xl">
+      <SheetContent className="overflow-y-auto data-[side=right]:w-full data-[side=right]:sm:max-w-xl">
         <SheetHeader className="border-b">
           <SheetTitle>{patient.data?.name ?? "Patient"}</SheetTitle>
           <SheetDescription>
