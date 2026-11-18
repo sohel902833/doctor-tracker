@@ -61,6 +61,26 @@ services:
     ports:
       - "${BACKEND_PORT:-5000}:${PORT:-5000}"
 
+  frontend:
+    build:
+      context: ./frontend
+    image: doctor-tracker-frontend
+    container_name: doctor-tracker-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    # Same settings file as the backend (BACKEND_URL, COOKIE_SECURE, ...).
+    env_file:
+      - ${BACKEND_ENV_FILE:-./backend/configs/.env.development}
+    environment:
+      # Reach the API inside the compose network, not via localhost.
+      BACKEND_URL: http://backend:${PORT:-5000}/api/v1
+      # The env file's PORT is the backend's; Next.js listens on 3000.
+      PORT: "3000"
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+
 volumes:
   mongodb_data:
   redis_data:

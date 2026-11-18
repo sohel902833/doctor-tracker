@@ -15,7 +15,7 @@ export type SessionTokens = {
 const baseOptions = {
   httpOnly: true,
   sameSite: "lax" as const,
-  secure: env.NODE_ENV === "production",
+  secure: env.COOKIE_SECURE,
   path: "/",
 };
 
