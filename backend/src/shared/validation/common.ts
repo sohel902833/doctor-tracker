@@ -8,6 +8,24 @@ export const requiredString = (label: string) =>
     .trim()
     .min(1, `${label} is required`);
 
+// bcrypt only uses the first 72 bytes, and capping length stops attackers
+// from sending huge passwords to burn CPU on hashing.
+export const PASSWORD_MAX_LENGTH = 72;
+const EMAIL_MAX_LENGTH = 254;
+
+/** For setting a password (create user, register). */
+export const passwordSchema = z
+  .string({ error: "Password is required" })
+  .min(8, "Password must be at least 8 characters")
+  .max(PASSWORD_MAX_LENGTH, `Password cannot exceed ${PASSWORD_MAX_LENGTH} characters`);
+
+export const emailSchema = z
+  .string({ error: "Email is required" })
+  .trim()
+  .max(EMAIL_MAX_LENGTH, `Email cannot exceed ${EMAIL_MAX_LENGTH} characters`)
+  .toLowerCase()
+  .pipe(z.email("Email must be valid"));
+
 /** Optional text that may also be cleared with null. */
 export const nullableString = () => z.string().trim().nullable().optional();
 

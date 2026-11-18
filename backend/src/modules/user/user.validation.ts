@@ -3,10 +3,12 @@ import { USER_TYPES } from "../../shared/constants/userTypes";
 import {
   booleanQuerySchema,
   dateSchema,
+  emailSchema,
   idParamSchema,
   nullableString,
   objectIdSchema,
   paginationQuerySchema,
+  passwordSchema,
   requiredString,
   sortOrderSchema,
 } from "../../shared/validation/common";
@@ -31,16 +33,9 @@ const userHospitalSchema = z
 
 export const createUserSchema = z.object({
   name: requiredString("Name"),
-  email: z
-    .string({ error: "Email is required" })
-    .trim()
-    .toLowerCase()
-    .pipe(z.email("Email must be valid")),
+  email: emailSchema,
   phone: nullableString(),
-  password: z
-    .string({ error: "Password is required" })
-    .min(8, "Password must be at least 8 characters")
-    .max(72, "Password cannot exceed 72 characters"),
+  password: passwordSchema,
   role: objectIdSchema("Role"),
   specialization: nullableString(),
   hospitals: z.array(userHospitalSchema).optional(),
