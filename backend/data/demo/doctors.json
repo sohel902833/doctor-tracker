@@ -1,0 +1,752 @@
+[
+ {
+  "name": "Dr. Rakib Das",
+  "email": "rakib.das.1@demo.doctortracker.dev",
+  "phone": "0199000000",
+  "gender": "MALE",
+  "dateOfBirth": "1963-02-15",
+  "bloodGroup": "B+",
+  "doctorProfile": {
+   "specialization": "Cardiology",
+   "qualifications": "MBBS, MS",
+   "designation": "Consultant",
+   "registrationNo": "A-51036"
+  },
+  "hospitals": [
+   {
+    "hospital": "Harmony Women's Hospital",
+    "startDate": "2016-01-01",
+    "endDate": "2018-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Central City Medical Centre",
+    "startDate": "2020-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Cardiology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Ayesha Talukder",
+  "email": "ayesha.talukder.2@demo.doctortracker.dev",
+  "phone": "0199000001",
+  "gender": "FEMALE",
+  "dateOfBirth": "1993-06-12",
+  "bloodGroup": "B+",
+  "doctorProfile": {
+   "specialization": "Endocrinology",
+   "qualifications": "MBBS, MS",
+   "designation": "Consultant",
+   "registrationNo": "A-76583"
+  },
+  "hospitals": [
+   {
+    "hospital": "Crescent Children's Hospital",
+    "startDate": "2020-01-01",
+    "endDate": "2023-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Bluebell Eye & ENT Hospital",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Endocrinology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Fatima Paul",
+  "email": "fatima.paul.3@demo.doctortracker.dev",
+  "phone": "0199000002",
+  "gender": "FEMALE",
+  "dateOfBirth": "1991-08-10",
+  "bloodGroup": "AB-",
+  "doctorProfile": {
+   "specialization": "Gastroenterology",
+   "qualifications": "MBBS, MD",
+   "designation": "Consultant",
+   "registrationNo": "A-85969"
+  },
+  "hospitals": [
+   {
+    "hospital": "Evergreen Neuro Centre",
+    "startDate": "2022-01-01",
+    "endDate": "2023-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Sunrise Specialized Hospital",
+    "startDate": "2026-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Gastroenterology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Rafiq Mollah",
+  "email": "rafiq.mollah.4@demo.doctortracker.dev",
+  "phone": "0199000003",
+  "gender": "MALE",
+  "dateOfBirth": "1967-08-03",
+  "bloodGroup": "A+",
+  "doctorProfile": {
+   "specialization": "Pulmonology",
+   "qualifications": "MBBS, MRCP (UK)",
+   "designation": "Associate Professor",
+   "registrationNo": "A-13458"
+  },
+  "hospitals": [
+   {
+    "hospital": "Sunrise Specialized Hospital",
+    "startDate": "2020-01-01",
+    "endDate": "2023-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Meadowbrook Community Hospital",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Pulmonology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Shahana Talukder",
+  "email": "shahana.talukder.5@demo.doctortracker.dev",
+  "phone": "0199000004",
+  "gender": "FEMALE",
+  "dateOfBirth": "1978-08-16",
+  "bloodGroup": "B-",
+  "doctorProfile": {
+   "specialization": "Medicine",
+   "qualifications": "MBBS, DDV",
+   "designation": "Consultant",
+   "registrationNo": "A-15394"
+  },
+  "hospitals": [
+   {
+    "hospital": "Lakeview Heart Institute",
+    "startDate": "2015-01-01",
+    "endDate": "2017-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Riverside Medical College Hospital",
+    "startDate": "2019-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Medicine consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Dilruba Islam",
+  "email": "dilruba.islam.6@demo.doctortracker.dev",
+  "phone": "0199000005",
+  "gender": "FEMALE",
+  "dateOfBirth": "1973-05-03",
+  "bloodGroup": "A+",
+  "doctorProfile": {
+   "specialization": "Orthopaedics",
+   "qualifications": "MBBS, MRCP (UK)",
+   "designation": "Senior Consultant",
+   "registrationNo": "A-15378"
+  },
+  "hospitals": [
+   {
+    "hospital": "Sunrise Specialized Hospital",
+    "startDate": "2017-01-01",
+    "endDate": "2018-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Harmony Women's Hospital",
+    "startDate": "2021-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Orthopaedics consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Shafiq Begum",
+  "email": "shafiq.begum.7@demo.doctortracker.dev",
+  "phone": "0199000006",
+  "gender": "MALE",
+  "dateOfBirth": "1986-02-04",
+  "bloodGroup": "A+",
+  "doctorProfile": {
+   "specialization": "Dermatology",
+   "qualifications": "MBBS, DDV",
+   "designation": "Professor",
+   "registrationNo": "A-51005"
+  },
+  "hospitals": [
+   {
+    "hospital": "Green Valley General Hospital",
+    "startDate": "2021-01-01",
+    "endDate": "2023-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Evergreen Neuro Centre",
+    "startDate": "2025-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Dermatology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Rezaul Haque",
+  "email": "rezaul.haque.8@demo.doctortracker.dev",
+  "phone": "0199000007",
+  "gender": "MALE",
+  "dateOfBirth": "1987-05-05",
+  "bloodGroup": "A-",
+  "doctorProfile": {
+   "specialization": "Psychiatry",
+   "qualifications": "MBBS, FCPS",
+   "designation": "Assistant Professor",
+   "registrationNo": "A-89773"
+  },
+  "hospitals": [
+   {
+    "hospital": "Riverside Medical College Hospital",
+    "startDate": "2017-01-01",
+    "endDate": "2018-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Green Valley General Hospital",
+    "startDate": "2021-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Psychiatry consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Lamia Khan",
+  "email": "lamia.khan.9@demo.doctortracker.dev",
+  "phone": "0199000008",
+  "gender": "FEMALE",
+  "dateOfBirth": "1985-06-11",
+  "bloodGroup": "B+",
+  "doctorProfile": {
+   "specialization": "Paediatrics",
+   "qualifications": "MBBS, DCH, FCPS",
+   "designation": "Assistant Professor",
+   "registrationNo": "A-47945"
+  },
+  "hospitals": [
+   {
+    "hospital": "Bluebell Eye & ENT Hospital",
+    "startDate": "2015-01-01",
+    "endDate": "2016-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Lakeview Heart Institute",
+    "startDate": "2019-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Paediatrics consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Dilruba Das",
+  "email": "dilruba.das.10@demo.doctortracker.dev",
+  "phone": "0199000009",
+  "gender": "FEMALE",
+  "dateOfBirth": "1972-05-15",
+  "bloodGroup": "A-",
+  "doctorProfile": {
+   "specialization": "Cardiology",
+   "qualifications": "MBBS, MD",
+   "designation": "Associate Professor",
+   "registrationNo": "A-50020"
+  },
+  "hospitals": [
+   {
+    "hospital": "Riverside Medical College Hospital",
+    "startDate": "2021-01-01",
+    "endDate": "2022-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Central City Medical Centre",
+    "startDate": "2025-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Cardiology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Moushumi Siddique",
+  "email": "moushumi.siddique.11@demo.doctortracker.dev",
+  "phone": "0199000010",
+  "gender": "FEMALE",
+  "dateOfBirth": "1966-01-28",
+  "bloodGroup": "B+",
+  "doctorProfile": {
+   "specialization": "Endocrinology",
+   "qualifications": "MBBS, FCPS, MD",
+   "designation": "Associate Professor",
+   "registrationNo": "A-99089"
+  },
+  "hospitals": [
+   {
+    "hospital": "Northgate Diagnostic & Hospital",
+    "startDate": "2020-01-01",
+    "endDate": "2022-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Evergreen Neuro Centre",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Endocrinology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Masud Sheikh",
+  "email": "masud.sheikh.12@demo.doctortracker.dev",
+  "phone": "0199000011",
+  "gender": "MALE",
+  "dateOfBirth": "1978-04-02",
+  "bloodGroup": "B-",
+  "doctorProfile": {
+   "specialization": "Gastroenterology",
+   "qualifications": "MBBS, MRCP (UK)",
+   "designation": "Professor",
+   "registrationNo": "A-30822"
+  },
+  "hospitals": [
+   {
+    "hospital": "Northgate Diagnostic & Hospital",
+    "startDate": "2020-01-01",
+    "endDate": "2021-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Riverside Medical College Hospital",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Gastroenterology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Nusrat Karim",
+  "email": "nusrat.karim.13@demo.doctortracker.dev",
+  "phone": "0199000012",
+  "gender": "FEMALE",
+  "dateOfBirth": "1974-12-06",
+  "bloodGroup": "A+",
+  "doctorProfile": {
+   "specialization": "Pulmonology",
+   "qualifications": "MBBS, DCH, FCPS",
+   "designation": "Associate Professor",
+   "registrationNo": "A-26731"
+  },
+  "hospitals": [
+   {
+    "hospital": "Lakeview Heart Institute",
+    "startDate": "2018-01-01",
+    "endDate": "2021-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Harmony Women's Hospital",
+    "startDate": "2022-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Pulmonology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Sohel Sheikh",
+  "email": "sohel.sheikh.14@demo.doctortracker.dev",
+  "phone": "0199000013",
+  "gender": "MALE",
+  "dateOfBirth": "1982-02-23",
+  "bloodGroup": "AB-",
+  "doctorProfile": {
+   "specialization": "Medicine",
+   "qualifications": "MBBS, FCPS, MD",
+   "designation": "Senior Consultant",
+   "registrationNo": "A-16966"
+  },
+  "hospitals": [
+   {
+    "hospital": "Lakeview Heart Institute",
+    "startDate": "2022-01-01",
+    "endDate": "2025-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Harmony Women's Hospital",
+    "startDate": "2026-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Medicine consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Arif Rahman",
+  "email": "arif.rahman.15@demo.doctortracker.dev",
+  "phone": "0199000014",
+  "gender": "MALE",
+  "dateOfBirth": "1969-09-01",
+  "bloodGroup": "B-",
+  "doctorProfile": {
+   "specialization": "Orthopaedics",
+   "qualifications": "MBBS, DDV",
+   "designation": "Consultant",
+   "registrationNo": "A-21946"
+  },
+  "hospitals": [
+   {
+    "hospital": "Green Valley General Hospital",
+    "startDate": "2016-01-01",
+    "endDate": "2019-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Evergreen Neuro Centre",
+    "startDate": "2020-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Orthopaedics consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Parvin Mia",
+  "email": "parvin.mia.16@demo.doctortracker.dev",
+  "phone": "0199000015",
+  "gender": "FEMALE",
+  "dateOfBirth": "1985-08-24",
+  "bloodGroup": "AB+",
+  "doctorProfile": {
+   "specialization": "Dermatology",
+   "qualifications": "MBBS, DCH, FCPS",
+   "designation": "Associate Professor",
+   "registrationNo": "A-81508"
+  },
+  "hospitals": [
+   {
+    "hospital": "Central City Medical Centre",
+    "startDate": "2022-01-01",
+    "endDate": "2024-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Bluebell Eye & ENT Hospital",
+    "startDate": "2026-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Dermatology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Arif Uddin",
+  "email": "arif.uddin.17@demo.doctortracker.dev",
+  "phone": "0199000016",
+  "gender": "MALE",
+  "dateOfBirth": "1967-10-26",
+  "bloodGroup": "B-",
+  "doctorProfile": {
+   "specialization": "Psychiatry",
+   "qualifications": "MBBS, MD",
+   "designation": "Assistant Professor",
+   "registrationNo": "A-51188"
+  },
+  "hospitals": [
+   {
+    "hospital": "Crescent Children's Hospital",
+    "startDate": "2017-01-01",
+    "endDate": "2019-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Evergreen Neuro Centre",
+    "startDate": "2021-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Psychiatry consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Nadia Haque",
+  "email": "nadia.haque.18@demo.doctortracker.dev",
+  "phone": "0199000017",
+  "gender": "FEMALE",
+  "dateOfBirth": "1972-12-13",
+  "bloodGroup": "AB-",
+  "doctorProfile": {
+   "specialization": "Paediatrics",
+   "qualifications": "MBBS, MS",
+   "designation": "Senior Consultant",
+   "registrationNo": "A-33527"
+  },
+  "hospitals": [
+   {
+    "hospital": "Crescent Children's Hospital",
+    "startDate": "2015-01-01",
+    "endDate": "2017-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Green Valley General Hospital",
+    "startDate": "2019-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Paediatrics consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Nasrin Chowdhury",
+  "email": "nasrin.chowdhury.19@demo.doctortracker.dev",
+  "phone": "0199000018",
+  "gender": "FEMALE",
+  "dateOfBirth": "1989-01-25",
+  "bloodGroup": "O+",
+  "doctorProfile": {
+   "specialization": "Cardiology",
+   "qualifications": "MBBS, MS",
+   "designation": "Assistant Professor",
+   "registrationNo": "A-20431"
+  },
+  "hospitals": [
+   {
+    "hospital": "Riverside Medical College Hospital",
+    "startDate": "2020-01-01",
+    "endDate": "2022-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Northgate Diagnostic & Hospital",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Cardiology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Kamal Begum",
+  "email": "kamal.begum.20@demo.doctortracker.dev",
+  "phone": "0199000019",
+  "gender": "MALE",
+  "dateOfBirth": "1968-09-03",
+  "bloodGroup": "B+",
+  "doctorProfile": {
+   "specialization": "Endocrinology",
+   "qualifications": "MBBS, FCPS",
+   "designation": "Associate Professor",
+   "registrationNo": "A-92868"
+  },
+  "hospitals": [
+   {
+    "hospital": "Crescent Children's Hospital",
+    "startDate": "2020-01-01",
+    "endDate": "2021-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Evergreen Neuro Centre",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Endocrinology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Shakil Mollah",
+  "email": "shakil.mollah.21@demo.doctortracker.dev",
+  "phone": "0199000020",
+  "gender": "MALE",
+  "dateOfBirth": "1973-12-24",
+  "bloodGroup": "O+",
+  "doctorProfile": {
+   "specialization": "Gastroenterology",
+   "qualifications": "MBBS, MS",
+   "designation": "Professor",
+   "registrationNo": "A-11497"
+  },
+  "hospitals": [
+   {
+    "hospital": "Central City Medical Centre",
+    "startDate": "2015-01-01",
+    "endDate": "2016-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Bluebell Eye & ENT Hospital",
+    "startDate": "2019-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Gastroenterology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Zahid Ahmed",
+  "email": "zahid.ahmed.22@demo.doctortracker.dev",
+  "phone": "0199000021",
+  "gender": "MALE",
+  "dateOfBirth": "1983-11-01",
+  "bloodGroup": "B+",
+  "doctorProfile": {
+   "specialization": "Pulmonology",
+   "qualifications": "MBBS, MD",
+   "designation": "Associate Professor",
+   "registrationNo": "A-96030"
+  },
+  "hospitals": [
+   {
+    "hospital": "Green Valley General Hospital",
+    "startDate": "2016-01-01",
+    "endDate": "2017-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Riverside Medical College Hospital",
+    "startDate": "2020-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Pulmonology consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Kamal Sarker",
+  "email": "kamal.sarker.23@demo.doctortracker.dev",
+  "phone": "0199000022",
+  "gender": "MALE",
+  "dateOfBirth": "1976-05-09",
+  "bloodGroup": "AB+",
+  "doctorProfile": {
+   "specialization": "Medicine",
+   "qualifications": "MBBS, MRCP (UK)",
+   "designation": "Senior Consultant",
+   "registrationNo": "A-23918"
+  },
+  "hospitals": [
+   {
+    "hospital": "Meadowbrook Community Hospital",
+    "startDate": "2015-01-01",
+    "endDate": "2016-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Evergreen Neuro Centre",
+    "startDate": "2019-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Medicine consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Moushumi Sheikh",
+  "email": "moushumi.sheikh.24@demo.doctortracker.dev",
+  "phone": "0199000023",
+  "gender": "FEMALE",
+  "dateOfBirth": "1966-01-12",
+  "bloodGroup": "A+",
+  "doctorProfile": {
+   "specialization": "Orthopaedics",
+   "qualifications": "MBBS, FCPS, MD",
+   "designation": "Professor",
+   "registrationNo": "A-82361"
+  },
+  "hospitals": [
+   {
+    "hospital": "Green Valley General Hospital",
+    "startDate": "2015-01-01",
+    "endDate": "2017-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Crescent Children's Hospital",
+    "startDate": "2019-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Orthopaedics consultant"
+   }
+  ]
+ },
+ {
+  "name": "Dr. Jannat Siddique",
+  "email": "jannat.siddique.25@demo.doctortracker.dev",
+  "phone": "0199000024",
+  "gender": "FEMALE",
+  "dateOfBirth": "1980-09-25",
+  "bloodGroup": "O-",
+  "doctorProfile": {
+   "specialization": "Dermatology",
+   "qualifications": "MBBS, MRCP (UK)",
+   "designation": "Senior Consultant",
+   "registrationNo": "A-80645"
+  },
+  "hospitals": [
+   {
+    "hospital": "Sunrise Specialized Hospital",
+    "startDate": "2020-01-01",
+    "endDate": "2021-06-30",
+    "isCurrent": false,
+    "summary": "Medical officer"
+   },
+   {
+    "hospital": "Lakeview Heart Institute",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "isCurrent": true,
+    "summary": "Dermatology consultant"
+   }
+  ]
+ }
+]

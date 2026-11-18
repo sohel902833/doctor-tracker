@@ -1,0 +1,74 @@
+[
+ {
+  "name": "Green Valley General Hospital",
+  "address": "House 70, Road 15, Dhanmondi, Dhaka",
+  "phone": "0255100000",
+  "email": "info@greenvalleygeneral.demo"
+ },
+ {
+  "name": "Riverside Medical College Hospital",
+  "address": "House 34, Road 37, Gulshan, Dhaka",
+  "phone": "0255100731",
+  "email": "info@riversidemedicalco.demo"
+ },
+ {
+  "name": "Sunrise Specialized Hospital",
+  "address": "House 18, Road 21, Mirpur, Dhaka",
+  "phone": "0255101462",
+  "email": "info@sunrisespecialized.demo"
+ },
+ {
+  "name": "Lakeview Heart Institute",
+  "address": "House 111, Road 29, Uttara, Dhaka",
+  "phone": "0255102193",
+  "email": "info@lakeviewheartinsti.demo"
+ },
+ {
+  "name": "Crescent Children's Hospital",
+  "address": "House 87, Road 3, Mohammadpur, Dhaka",
+  "phone": "0255102924",
+  "email": "info@crescentchildrensh.demo"
+ },
+ {
+  "name": "Northgate Diagnostic & Hospital",
+  "address": "House 100, Road 14, Banani, Dhaka",
+  "phone": "0255103655",
+  "email": "info@northgatediagnosti.demo"
+ },
+ {
+  "name": "Harmony Women's Hospital",
+  "address": "House 49, Road 13, Motijheel, Dhaka",
+  "phone": "0255104386",
+  "email": "info@harmonywomenshospi.demo"
+ },
+ {
+  "name": "Central City Medical Centre",
+  "address": "House 111, Road 39, Badda, Dhaka",
+  "phone": "0255105117",
+  "email": "info@centralcitymedical.demo"
+ },
+ {
+  "name": "Bluebell Eye & ENT Hospital",
+  "address": "House 12, Road 34, Bashundhara, Dhaka",
+  "phone": "0255105848",
+  "email": "info@bluebelleyeenthosp.demo"
+ },
+ {
+  "name": "Silverline Orthopaedic Centre",
+  "address": "House 12, Road 6, Shyamoli, Dhaka",
+  "phone": "0255106579",
+  "email": "info@silverlineorthopae.demo"
+ },
+ {
+  "name": "Meadowbrook Community Hospital",
+  "address": "House 86, Road 21, Rampura, Dhaka",
+  "phone": "0255107310",
+  "email": "info@meadowbrookcommuni.demo"
+ },
+ {
+  "name": "Evergreen Neuro Centre",
+  "address": "House 99, Road 9, Malibagh, Dhaka",
+  "phone": "0255108041",
+  "email": "info@evergreenneurocent.demo"
+ }
+]

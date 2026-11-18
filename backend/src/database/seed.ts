@@ -7,6 +7,8 @@
  * 2. Creates the default roles (Super Admin, Doctor, Patient)
  * 3. Creates the first Super Admin (SEED_ADMIN_* env vars)
  * 4. Imports the medicine catalog (backend/data/medicines) if not imported yet
+ * 5. Imports demo hospitals, doctors, patients and consultations
+ *    (backend/data/demo) when SEED_DEMO_DATA=true
  */
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
@@ -25,6 +27,7 @@ import { RoleModel } from "../modules/role/role.model";
 import { UserModel } from "../modules/user/user.model";
 import type { UserType } from "../shared/constants/userTypes";
 import { CounterModel } from "../shared/models/counter.model";
+import { importDemoData } from "./demo-import";
 import {
   appPermissions,
   Modules,
@@ -40,6 +43,14 @@ const adminEnv = z
     SEED_ADMIN_PASSWORD: passwordSchema,
   })
   .safeParse(process.env);
+
+// Demo data is opt-in, so production never gets fake records.
+const demoEnv = z
+  .object({
+    SEED_DEMO_DATA: z.enum(["true", "false"]).default("false"),
+    SEED_DEMO_PASSWORD: passwordSchema.default("Doctor@123"),
+  })
+  .parse(process.env);
 
 const log = (message: string) => console.log(`[seed] ${message}`);
 
@@ -156,11 +167,30 @@ const ensureMedicineCatalog = async () => {
 // ---------- Run ----------
 
 /** Expects an open MongoDB connection. */
+const ensureDemoData = async () => {
+  if (demoEnv.SEED_DEMO_DATA !== "true") return;
+
+  const admin = await UserModel.findOne({ userType: "ADMIN" }).sort({ createdAt: 1 }).select("_id").lean();
+  if (!admin) {
+    log("⚠ Demo data skipped: no admin user (needed as the creator of demo records)");
+    return;
+  }
+
+  const added = await importDemoData({ doctorPassword: demoEnv.SEED_DEMO_PASSWORD, adminId: admin._id });
+  const summary = Object.entries(added).map(([name, count]) => `${count} ${name}`).join(", ");
+  log(
+    Object.values(added).some(Boolean)
+      ? `✔ Demo data added: ${summary}`
+      : "• Demo data: already imported",
+  );
+};
+
 export const runSeed = async () => {
   await syncAllIndexes();
   const { superAdminRoleId } = await ensureRoles();
   const adminEmail = await ensureSuperAdmin(superAdminRoleId);
   await ensureMedicineCatalog();
+  await ensureDemoData();
 
   log("Seed complete");
   // The password is never logged; it comes from SEED_ADMIN_PASSWORD.

@@ -59,6 +59,8 @@ const consultationSchema = new Schema(
       phone: { type: String, default: null },
     },
     createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    // Key of an imported (demo) record; null for consultations made in the app.
+    sourceKey: { type: String, default: null },
   },
   { timestamps: true, versionKey: false },
 );
@@ -68,6 +70,10 @@ consultationSchema.index({ doctor: 1, patient: 1, visitedAt: -1 });
 consultationSchema.index({ doctor: 1, visitedAt: -1 });
 consultationSchema.index({ patient: 1, visitedAt: -1 });
 consultationSchema.index({ visitedAt: 1 });
+consultationSchema.index(
+  { sourceKey: 1 },
+  { unique: true, partialFilterExpression: { sourceKey: { $type: "string" } } },
+);
 
 export type Consultation = InferSchemaType<typeof consultationSchema>;
 

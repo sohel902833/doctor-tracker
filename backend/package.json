@@ -6,7 +6,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx src/scripts/seed.ts"
+    "seed": "tsx src/scripts/seed.ts",
+    "demo:generate": "tsx src/scripts/generate-demo-data.ts"
   },
   "author": "",
   "license": "ISC",
