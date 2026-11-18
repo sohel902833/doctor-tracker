@@ -1,0 +1,14 @@
+node_modules
+dist
+npm-debug.log*
+
+# Secrets come from the environment (docker compose), never from the image.
+configs/.env*
+
+.git
+.gitignore
+.vscode
+.idea
+*.md
+Dockerfile
+.dockerignore

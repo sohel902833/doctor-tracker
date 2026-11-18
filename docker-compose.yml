@@ -38,6 +38,29 @@ services:
       retries: 5
       start_period: 5s
 
+  backend:
+    build:
+      context: ./backend
+    image: doctor-tracker-backend
+    container_name: doctor-tracker-backend
+    restart: unless-stopped
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    # App settings (JWT secrets, CORS, seed admin, ...). Override the file
+    # with BACKEND_ENV_FILE, e.g. for production.
+    env_file:
+      - ${BACKEND_ENV_FILE:-./backend/configs/.env.development}
+    # Inside the compose network MongoDB/Redis are reached by service name,
+    # not localhost, so these two override the values from the env file.
+    environment:
+      MONGO_URI: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongodb:27017/${MONGO_DB_NAME:-doctor_tracker}?authSource=admin
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+    ports:
+      - "${BACKEND_PORT:-5000}:${PORT:-5000}"
+
 volumes:
   mongodb_data:
   redis_data:
