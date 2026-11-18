@@ -1,20 +1,25 @@
-import jwt, { type SignOptions } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { env } from "../../config/env";
 
-export type AccessTokenPayload = { sub: string };
+export type TokenType = "access" | "refresh";
 
-export const signAccessToken = (userId: string) =>
-  jwt.sign({ sub: userId } satisfies AccessTokenPayload, env.JWT_SECRET, {
-    expiresIn: env.JWT_EXPIRES_IN as SignOptions["expiresIn"],
+const tokenConfig = {
+  access: { secret: env.JWT_ACCESS_SECRET, ttl: env.ACCESS_TOKEN_TTL },
+  refresh: { secret: env.JWT_REFRESH_SECRET, ttl: env.REFRESH_TOKEN_TTL },
+} as const;
+
+export const signToken = (type: TokenType, userId: string) =>
+  jwt.sign({ sub: userId, type }, tokenConfig[type].secret, {
+    expiresIn: tokenConfig[type].ttl,
   });
 
-/** Returns the payload, or null if the token is invalid or expired. */
-export const verifyAccessToken = (token: string) => {
+/** Returns the userId, or null if the token is invalid, expired or the wrong type. */
+export const verifyToken = (type: TokenType, token: string) => {
   try {
-    const payload = jwt.verify(token, env.JWT_SECRET);
-    if (typeof payload === "string" || !payload.sub) return null;
+    const payload = jwt.verify(token, tokenConfig[type].secret);
+    if (typeof payload === "string" || payload.type !== type) return null;
 
-    return { sub: payload.sub } as AccessTokenPayload;
+    return payload.sub ?? null;
   } catch {
     return null;
   }

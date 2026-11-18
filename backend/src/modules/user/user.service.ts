@@ -15,6 +15,10 @@ import {
   success,
   type FieldErrors,
 } from "../../shared/utils/response";
+import {
+  clearSessionProfile,
+  syncSessionProfile,
+} from "../auth/session";
 import { HospitalModel } from "../hospital/hospital.model";
 import { RoleModel } from "../role/role.model";
 import { UserModel } from "./user.model";
@@ -166,6 +170,7 @@ export const updateUser = async (id: string, input: UpdateUserInput) => {
     }
 
     await UserModel.updateOne({ _id: id }, update, { runValidators: true });
+    await syncSessionProfile(id);
     return success("User updated", await findUserWithRelations(id));
   } catch (error) {
     return serverError("Failed to update user", error);
@@ -176,6 +181,8 @@ export const deleteUser = async (id: string) => {
   try {
     const user = await UserModel.findByIdAndDelete(id).lean();
     if (!user) return notFound("User not found");
+
+    await clearSessionProfile(id);
 
     return success("User deleted", user);
   } catch (error) {

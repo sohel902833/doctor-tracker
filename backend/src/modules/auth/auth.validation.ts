@@ -26,5 +26,19 @@ export const registerSchema = z.object({
   password: passwordSchema,
 });
 
+const refreshTokenSchema = z.uuid("Invalid refresh token");
+
+export const refreshSchema = z.object({
+  refreshToken: z
+    .string({ error: "Refresh token is required" })
+    .pipe(refreshTokenSchema),
+});
+
+// Sending the refresh token on logout revokes it too.
+export const logoutSchema = z.object({
+  refreshToken: refreshTokenSchema.optional(),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
+export type LogoutInput = z.infer<typeof logoutSchema>;

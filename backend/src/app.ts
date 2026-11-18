@@ -1,11 +1,13 @@
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
+import mongoose from "mongoose";
 import { env } from "./config/env";
+import { redis } from "./config/redis";
 import routes from "./routes";
 import { errorHandler } from "./shared/middlewares/errorHandler";
 import { notFoundHandler } from "./shared/middlewares/notFoundHandler";
-import { success } from "./shared/utils/response";
+import { serviceUnavailable, success } from "./shared/utils/response";
 
 const app = express();
 
@@ -15,7 +17,15 @@ app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/health", (_req, res) => {
-  const result = success("Server is healthy");
+  const services = {
+    mongodb: mongoose.connection.readyState === 1 ? "up" : "down",
+    redis: redis.isReady ? "up" : "down",
+  };
+  const healthy = Object.values(services).every((state) => state === "up");
+
+  const result = healthy
+    ? success("Server is healthy", services)
+    : serviceUnavailable("Some services are down", services);
   res.status(result.status).json(result);
 });
 

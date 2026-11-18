@@ -59,6 +59,10 @@ export const conflict = (message = "Conflict", errors?: FieldErrors) =>
   fail(409, message, errors);
 
 // ---------- Server errors ----------
+export const serviceUnavailable = <T>(message = "Service unavailable", data?: T) => ({
+  ...fail(503, message),
+  data: data ?? null,
+});
 export const serverError = (
   message = "Internal server error",
   error?: unknown,

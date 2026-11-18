@@ -1,9 +1,7 @@
 import bcrypt from "bcryptjs";
 import type { UserType } from "../../shared/constants/userTypes";
-import { signAccessToken } from "../../shared/utils/jwt";
 import {
   forbidden,
-  notFound,
   serverError,
   success,
   unauthorized,
@@ -11,19 +9,17 @@ import {
 import { RoleModel } from "../role/role.model";
 import { UserModel } from "../user/user.model";
 import * as userService from "../user/user.service";
-import type { LoginInput, RegisterInput } from "./auth.validation";
+import type { LoginInput, LogoutInput, RegisterInput } from "./auth.validation";
+import {
+  consumeRefreshToken,
+  createSession,
+  revokeTokens,
+  type SessionProfile,
+} from "./session";
 
 // Compared against when the email is unknown, so a missing user takes
 // as long as a wrong password (prevents guessing emails by timing).
 const DUMMY_HASH = bcrypt.hashSync("dummy-password-for-timing", 10);
-
-const findProfile = (id: string) =>
-  UserModel.findById(id)
-    .populate([
-      { path: "role", select: "name userType permissions subordinateRoles" },
-      { path: "hospitals.hospital", select: "name" },
-    ])
-    .lean();
 
 export const login = async ({ email, password }: LoginInput) => {
   try {
@@ -41,11 +37,10 @@ export const login = async ({ email, password }: LoginInput) => {
 
     if (!user.isActive) return forbidden("Your account is disabled");
 
-    const userId = user._id.toString();
-    return success("Login successful", {
-      token: signAccessToken(userId),
-      user: await findProfile(userId),
-    });
+    const session = await createSession(user._id.toString());
+    if (!session) return unauthorized("Invalid email or password");
+
+    return success("Login successful", session);
   } catch (error) {
     return serverError("Failed to log in", error);
   }
@@ -73,24 +68,43 @@ export const register = async (input: RegisterInput) => {
     });
     if (!result.success || !result.data) return result;
 
-    const userId = result.data._id.toString();
-    return {
-      ...result,
-      message: "Registration successful",
-      data: { token: signAccessToken(userId), user: result.data },
-    };
+    const session = await createSession(result.data._id.toString());
+    if (!session) return serverError("Failed to start session");
+
+    return { ...result, message: "Registration successful", data: session };
   } catch (error) {
     return serverError("Failed to register", error);
   }
 };
 
-export const getProfile = async (userId: string) => {
+/** Swaps a refresh token for a new token pair. Each refresh token works once. */
+export const refresh = async (refreshToken: string) => {
   try {
-    const user = await findProfile(userId);
-    if (!user) return notFound("User not found");
+    const userId = await consumeRefreshToken(refreshToken);
+    if (!userId) return unauthorized("Invalid or expired refresh token");
 
-    return success("Profile fetched", user);
+    const user = await UserModel.findById(userId).select("isActive").lean();
+    if (!user) return unauthorized("User no longer exists");
+    if (!user.isActive) return forbidden("Your account is disabled");
+
+    const session = await createSession(userId);
+    if (!session) return unauthorized("User no longer exists");
+
+    return success("Token refreshed", session);
   } catch (error) {
-    return serverError("Failed to fetch profile", error);
+    return serverError("Failed to refresh token", error);
   }
 };
+
+export const logout = async (authToken: string, { refreshToken }: LogoutInput) => {
+  try {
+    await revokeTokens({ authToken, refreshToken });
+    return success("Logged out");
+  } catch (error) {
+    return serverError("Failed to log out", error);
+  }
+};
+
+/** `authenticate` already loaded the cached profile with fresh permissions. */
+export const getProfile = (profile: SessionProfile) =>
+  success("Profile fetched", profile);

@@ -1,10 +1,11 @@
 import app from "./app";
 import { connectDB, disconnectDB } from "./config/db";
 import { env } from "./config/env";
+import { connectRedis, disconnectRedis } from "./config/redis";
 
 const start = async () => {
   try {
-    await connectDB();
+    await Promise.all([connectDB(), connectRedis()]);
 
     const server = app.listen(env.PORT, () => {
       console.log(`Server running on http://localhost:${env.PORT} (${env.NODE_ENV})`);
@@ -13,7 +14,7 @@ const start = async () => {
     const shutdown = (signal: string) => {
       console.log(`${signal} received, shutting down...`);
       server.close(async () => {
-        await disconnectDB();
+        await Promise.allSettled([disconnectDB(), disconnectRedis()]);
         process.exit(0);
       });
     };

@@ -4,7 +4,12 @@ import { authenticate } from "../../shared/middlewares/authenticate";
 import { validate } from "../../shared/middlewares/validate";
 import { forbidden } from "../../shared/utils/response";
 import * as authController from "./auth.controller";
-import { loginSchema, registerSchema } from "./auth.validation";
+import {
+  loginSchema,
+  logoutSchema,
+  refreshSchema,
+  registerSchema,
+} from "./auth.validation";
 
 const router = Router();
 
@@ -21,6 +26,13 @@ router.post(
   ensureRegistrationEnabled,
   validate(registerSchema),
   authController.register,
+);
+router.post("/refresh", validate(refreshSchema), authController.refresh);
+router.post(
+  "/logout",
+  authenticate,
+  validate(logoutSchema),
+  authController.logout,
 );
 router.get("/profile", authenticate, authController.getProfile);
 

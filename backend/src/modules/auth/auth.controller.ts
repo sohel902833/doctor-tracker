@@ -11,8 +11,19 @@ export const register: RequestHandler = async (req, res) => {
   res.status(result.status).json(result);
 };
 
-// `authenticate` runs first, so req.user is always set here.
-export const getProfile: RequestHandler = async (req, res) => {
-  const result = await authService.getProfile(req.user!.id);
+export const refresh: RequestHandler = async (req, res) => {
+  const result = await authService.refresh(req.body.refreshToken);
+  res.status(result.status).json(result);
+};
+
+// `authenticate` runs first on the routes below, so req.user is always set.
+
+export const logout: RequestHandler = async (req, res) => {
+  const result = await authService.logout(req.authTokenId!, req.body);
+  res.status(result.status).json(result);
+};
+
+export const getProfile: RequestHandler = (req, res) => {
+  const result = authService.getProfile(req.user!);
   res.status(result.status).json(result);
 };
