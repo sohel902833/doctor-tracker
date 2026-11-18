@@ -1,6 +1,7 @@
 import { Router, type RequestHandler } from "express";
 import { env } from "../../config/env";
 import { authenticate } from "../../shared/middlewares/authenticate";
+import { guard } from "../../shared/middlewares/guard";
 import { validate } from "../../shared/middlewares/validate";
 import { forbidden } from "../../shared/utils/response";
 import * as authController from "./auth.controller";
@@ -20,7 +21,12 @@ const ensureRegistrationEnabled: RequestHandler = (_req, res, next) => {
   res.status(result.status).json(result);
 };
 
-router.post("/login", validate(loginSchema), authController.login);
+router.post(
+  "/login",
+  guard({ rateLimit: { limit: 5, windowSeconds: 60, by: "ip" } }),
+  validate(loginSchema),
+  authController.login,
+);
 router.post(
   "/register",
   ensureRegistrationEnabled,

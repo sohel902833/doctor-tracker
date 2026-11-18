@@ -3,6 +3,7 @@ import { env } from "../../config/env";
 import { redis, REDIS_PREFIX } from "../../config/redis";
 import type { RolePermissions } from "../../shared/permissions/permission.utils";
 import { signToken, verifyToken, type TokenType } from "../../shared/utils/jwt";
+import { HospitalModel } from "../hospital/hospital.model";
 import { RoleModel } from "../role/role.model";
 import { UserModel } from "../user/user.model";
 
@@ -43,8 +44,8 @@ const toPlain = <T>(value: unknown) => JSON.parse(JSON.stringify(value)) as T;
 const loadProfileFromDb = async (userId: string) => {
   const user = await UserModel.findById(userId)
     .populate([
-      { path: "role", select: ROLE_FIELDS },
-      { path: "hospitals.hospital", select: "name" },
+      { path: "role", select: ROLE_FIELDS, model: RoleModel },
+      { path: "hospitals.hospital", select: "name", model: HospitalModel },
     ])
     .lean();
 

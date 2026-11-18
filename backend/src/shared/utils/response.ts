@@ -57,6 +57,9 @@ export const forbidden = (message = "Forbidden") => fail(403, message);
 export const notFound = (message = "Not found") => fail(404, message);
 export const conflict = (message = "Conflict", errors?: FieldErrors) =>
   fail(409, message, errors);
+export const tooManyRequests = (
+  message = "Too many requests, please try again later",
+) => fail(429, message);
 
 // ---------- Server errors ----------
 export const serviceUnavailable = <T>(message = "Service unavailable", data?: T) => ({
