@@ -2,6 +2,7 @@ import app from "./app";
 import { connectDB, disconnectDB } from "./config/db";
 import { env } from "./config/env";
 import { connectRedis, disconnectRedis } from "./config/redis";
+import { runSeed } from "./database/seed";
 
 const start = async () => {
   try {
@@ -9,6 +10,10 @@ const start = async () => {
 
     const server = app.listen(env.PORT, () => {
       console.log(`Server running on http://localhost:${env.PORT} (${env.NODE_ENV})`);
+
+      // Roles, first admin, medicine catalog: only what is missing.
+      // Runs in the background so it never delays or blocks startup.
+      runSeed().catch((error) => console.error("[seed] Seed failed", error));
     });
 
     const shutdown = (signal: string) => {

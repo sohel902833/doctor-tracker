@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import type { UserType } from "../../shared/constants/userTypes";
 import { buildPaginationMeta, getSkip } from "../../shared/utils/pagination";
 import {
   buildDateRangeFilter,
@@ -15,10 +16,8 @@ import {
   success,
   type FieldErrors,
 } from "../../shared/utils/response";
-import {
-  clearSessionProfile,
-  syncSessionProfile,
-} from "../auth/session";
+import { clearSessionProfile, syncSessionProfile } from "../auth/session";
+import { DoctorPatientModel } from "../doctorPatient/doctorPatient.model";
 import { HospitalModel } from "../hospital/hospital.model";
 import { RoleModel } from "../role/role.model";
 import { UserModel } from "./user.model";
@@ -39,7 +38,7 @@ const userPopulate = [
 
 /** Returns { email, phone } errors for values already used by another user. */
 const findTakenFields = async (
-  { email, phone }: { email?: string; phone?: string | null },
+  { email, phone }: { email?: string | null; phone?: string | null },
   excludeId?: string,
 ) => {
   const notSelf = excludeId ? { _id: { $ne: excludeId } } : {};
@@ -52,6 +51,23 @@ const findTakenFields = async (
   const errors: FieldErrors = {};
   if (emailTaken) errors.email = "Email is already in use";
   if (phoneTaken) errors.phone = "Phone is already in use";
+
+  return Object.keys(errors).length ? errors : null;
+};
+
+/** Patients need a phone. Everyone else logs in, so needs email + password. */
+const findMissingFields = (
+  userType: string,
+  user: { email?: string | null; phone?: string | null; hasPassword: boolean },
+) => {
+  const errors: FieldErrors = {};
+
+  if (userType === ("PATIENT" satisfies UserType)) {
+    if (!user.phone) errors.phone = "Phone is required for patients";
+  } else {
+    if (!user.email) errors.email = "Email is required";
+    if (!user.hasPassword) errors.password = "Password is required";
+  }
 
   return Object.keys(errors).length ? errors : null;
 };
@@ -77,6 +93,12 @@ export const createUser = async (input: CreateUserInput) => {
     const role = await RoleModel.findById(input.role).select("userType").lean();
     if (!role) return badRequest("Invalid role", { role: "Role not found" });
 
+    const missingFields = findMissingFields(role.userType, {
+      ...input,
+      hasPassword: Boolean(input.password),
+    });
+    if (missingFields) return badRequest("Validation failed", missingFields);
+
     if (await hasMissingHospitals(input.hospitals)) {
       return badRequest("Invalid hospitals", {
         hospitals: "One or more hospitals were not found",
@@ -85,8 +107,15 @@ export const createUser = async (input: CreateUserInput) => {
 
     const user = await UserModel.create({
       ...input,
-      password: await bcrypt.hash(input.password, SALT_ROUNDS),
+      password: input.password
+        ? await bcrypt.hash(input.password, SALT_ROUNDS)
+        : null,
       userType: role.userType,
+      // Profiles exist as objects for their user type, so nested fields
+      // like patientProfile.currentCondition can be updated directly.
+      doctorProfile:
+        role.userType === "DOCTOR" ? (input.doctorProfile ?? {}) : null,
+      patientProfile: role.userType === "PATIENT" ? {} : null,
     });
 
     return created(
@@ -108,7 +137,10 @@ export const getUsers = async (query: ListUsersQuery) => {
       ...(query.hospital && { "hospitals.hospital": query.hospital }),
       ...(query.isActive !== undefined && { isActive: query.isActive }),
       ...(query.specialization && {
-        specialization: new RegExp(escapeRegex(query.specialization), "i"),
+        "doctorProfile.specialization": new RegExp(
+          escapeRegex(query.specialization),
+          "i",
+        ),
       }),
     };
 
@@ -141,14 +173,16 @@ export const getUserById = async (id: string) => {
 
 export const updateUser = async (id: string, input: UpdateUserInput) => {
   try {
-    if (!(await UserModel.exists({ _id: id }))) {
-      return notFound("User not found");
-    }
+    const existing = await UserModel.findById(id)
+      .select("+password email phone userType")
+      .lean();
+    if (!existing) return notFound("User not found");
 
     const takenFields = await findTakenFields(input, id);
     if (takenFields) return conflict("User already exists", takenFields);
 
     const update: Record<string, unknown> = { ...input };
+    let userType = existing.userType;
 
     if (input.role) {
       const role = await RoleModel.findById(input.role)
@@ -156,8 +190,16 @@ export const updateUser = async (id: string, input: UpdateUserInput) => {
         .lean();
       if (!role) return badRequest("Invalid role", { role: "Role not found" });
 
-      update.userType = role.userType;
+      userType = role.userType;
+      update.userType = userType;
     }
+
+    const missingFields = findMissingFields(userType, {
+      email: input.email !== undefined ? input.email : existing.email,
+      phone: input.phone !== undefined ? input.phone : existing.phone,
+      hasPassword: Boolean(input.password ?? existing.password),
+    });
+    if (missingFields) return badRequest("Validation failed", missingFields);
 
     if (await hasMissingHospitals(input.hospitals)) {
       return badRequest("Invalid hospitals", {
@@ -179,9 +221,23 @@ export const updateUser = async (id: string, input: UpdateUserInput) => {
 
 export const deleteUser = async (id: string) => {
   try {
-    const user = await UserModel.findByIdAndDelete(id).lean();
+    const user = await UserModel.findById(id).lean();
     if (!user) return notFound("User not found");
 
+    if (
+      user.userType === ("DOCTOR" satisfies UserType) &&
+      (await DoctorPatientModel.exists({ doctor: id, status: "ACTIVE" }))
+    ) {
+      return conflict(
+        "Doctor still has patients. Remove them from the doctor's list first",
+      );
+    }
+
+    await UserModel.deleteOne({ _id: id });
+    // Consultations are kept as history (they hold their own snapshots).
+    await DoctorPatientModel.deleteMany({
+      $or: [{ doctor: id }, { patient: id }],
+    });
     await clearSessionProfile(id);
 
     return success("User deleted", user);

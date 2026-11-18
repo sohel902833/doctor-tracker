@@ -26,6 +26,27 @@ export const emailSchema = z
   .toLowerCase()
   .pipe(z.email("Email must be valid"));
 
+/** Strips spaces, dashes and brackets: "01711-000 000" -> "01711000000". */
+export const phoneSchema = z
+  .string({ error: "Phone is required" })
+  .trim()
+  .transform((value) => value.replace(/[\s\-()]/g, ""))
+  .pipe(
+    z.string().regex(/^\+?\d{6,15}$/, "Phone must be 6 to 15 digits"),
+  );
+
+export const ageSchema = z
+  .number({ error: "Age must be a number" })
+  .int("Age must be a whole number")
+  .min(0, "Age cannot be negative")
+  .max(130, "Age is not valid");
+
+/** z.enum with a readable error: "Gender must be one of: MALE, FEMALE, OTHER". */
+export const enumSchema = <const T extends readonly [string, ...string[]]>(
+  values: T,
+  label: string,
+) => z.enum(values, { error: `${label} must be one of: ${values.join(", ")}` });
+
 /** Optional text that may also be cleared with null. */
 export const nullableString = () => z.string().trim().nullable().optional();
 

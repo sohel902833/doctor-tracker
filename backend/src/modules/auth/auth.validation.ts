@@ -1,9 +1,9 @@
 import { z } from "zod";
 import {
   emailSchema,
-  nullableString,
   PASSWORD_MAX_LENGTH,
   passwordSchema,
+  phoneSchema,
   requiredString,
 } from "../../shared/validation/common";
 
@@ -22,7 +22,8 @@ export const loginSchema = z.object({
 export const registerSchema = z.object({
   name: requiredString("Name"),
   email: emailSchema,
-  phone: nullableString(),
+  // Self sign-up creates a patient, and patients need a phone.
+  phone: phoneSchema,
   password: passwordSchema,
 });
 

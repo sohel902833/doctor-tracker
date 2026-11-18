@@ -2,6 +2,9 @@ export const Modules = {
   ROLE: "role",
   USER: "user",
   HOSPITAL: "hospital",
+  PATIENT: "patient",
+  CONSULTATION: "consultation",
+  MEDICINE: "medicine",
 } as const;
 
 export type ModuleName = (typeof Modules)[keyof typeof Modules];
